@@ -39,59 +39,40 @@
                         $_SESSION["permision"] = $data["permision"];
                     }
                     
-                        // Thực thi hành động sau khi lưu thông tin vào session
-                        // ở đây mình tiến hành chuyển hướng trang web tới một trang gọi là index.php
-                    header('Location: Home2.php');
+               if (isset($_SESSION['permision']) == true) {
+                $permission = $_SESSION['permision'];
+                // Kiểm tra quyền của người đó có phải là admin hay không
+                    if ($permission == '1') {
+                        header('Location:Home3.php');
+                    }else{
+                   
+                   // nếu không phải admin chuyển đến trang client
+                   header('Location: Home4.php');
+                        }
+                }
                 }
             }
         }
         ?>
-        <?php
-        if(isset($_POST['btn_Signup'])){
-            $username=$_POST["username"];
-            $password=$_POST['pass'];
-            $name=$_POST['name'];
-            $email=$_POST['email'];
-            if($username== "" || $password== "" || $name== "" || $email== ""){            
-                echo "<strong >Vui lòng nhập đủ các thông tin trên !</strong>";
-            }else{
-                $sql = "INSERT INTO users(username, password, fullname, email, createdate ) VALUES ( '$username', '$password', '$name', '$email', now())";
-                mysqli_query($conn,$sql);
-                echo" Chúc mừng bạn đã đăng ký thành công !";
-            }
-        }
-        mysqli_close($conn);
-    ?>
+        
         
     
     </head>
 <body>
-<div id="header">
-      </div>        
+    <div id="header">
+    </div>
+    
         <ul>
-            <li><a href="Home1.php">Home</a></li>
-            <li><a href="#news">Các khóa học</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Bài tập</a>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Thi Thử</a>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1 </a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-            </li>
+            <li><a href="dangnhap.php">Home</a></li>
+            <li><a href="dangky1.php">Đăng ký</a></li>
+            
+            
             <div class="login-container">    
-                <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;" class="login-container button">Sign Up</button>
+                
                 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="login-container button">Login</button> 
                 </div>
         </ul>
+        
 
 
     
